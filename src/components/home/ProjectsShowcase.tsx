@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -36,39 +36,10 @@ const projects = [
 ];
 
 const ProjectsShowcase = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const projectRefs = useRef<(HTMLDivElement | null)[]>([]);
-  
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-    
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    };
-    
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    
-    projectRefs.current.forEach((ref) => {
-      if (ref) observer.observe(ref);
-    });
-    
-    return () => {
-      projectRefs.current.forEach((ref) => {
-        if (ref) observer.unobserve(ref);
-      });
-    };
-  }, []);
+  console.log('ProjectsShowcase rendering'); // Debug log
   
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
+    <section className="py-24 bg-white">
       <div className="container-custom">
         <div className="flex flex-col md:flex-row items-start justify-between mb-16">
           <h2 className="h2 max-w-lg mb-6 md:mb-0">Featured Work</h2>
@@ -90,9 +61,7 @@ const ProjectsShowcase = () => {
           {projects.map((project, index) => (
             <div
               key={project.id}
-              ref={(el) => (projectRefs.current[index] = el)}
-              className="project-card reveal group"
-              style={{ transitionDelay: `${index * 0.1}s` }}
+              className="project-card group"
             >
               <Link to={`/work/${project.id}`} className="block">
                 <div className="relative overflow-hidden">
@@ -100,6 +69,7 @@ const ProjectsShowcase = () => {
                     src={project.image}
                     alt={project.title}
                     className="project-card-image w-full aspect-[4/3] object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>

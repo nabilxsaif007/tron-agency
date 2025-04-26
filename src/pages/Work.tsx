@@ -53,24 +53,27 @@ const workItems = [
 
 const Work = () => {
   useEffect(() => {
+    // Ensure we start at the top of the page
     window.scrollTo(0, 0);
+    
+    // Log to check if the component is mounting properly
+    console.log('Work page mounted');
   }, []);
   
   return (
     <div className="min-h-screen bg-white">
-      <CustomCursor />
       <Navbar />
       
       <main>
         <section className="pt-32 pb-16">
           <div className="container-custom">
-            <ScrollReveal>
+            <div className="reveal-content">
               <h1 className="h1 mb-8 max-w-5xl">Work</h1>
               <p className="large-text max-w-2xl">
                 We create digital experiences that connect with people. Here's a selection 
                 of our most impactful work.
               </p>
-            </ScrollReveal>
+            </div>
           </div>
         </section>
         
@@ -78,27 +81,26 @@ const Work = () => {
           <div className="container-custom">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {workItems.map((work, index) => (
-                <ScrollReveal key={work.id} delay={index * 0.1}>
-                  <div className="project-card group">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={work.image}
-                        alt={work.title}
-                        className="project-card-image w-full aspect-[4/3] object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                    </div>
-                    <div className="mt-6">
-                      <span className="block text-sm text-gray-500 mb-2">
-                        {work.category}
-                      </span>
-                      <h3 className="text-2xl md:text-3xl font-semibold mb-2">
-                        {work.title}
-                      </h3>
-                      <p className="text-lg">{work.description}</p>
-                    </div>
+                <div key={work.id} className="project-card group">
+                  <div className="relative overflow-hidden">
+                    <img
+                      src={work.image}
+                      alt={work.title}
+                      className="project-card-image w-full aspect-[4/3] object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                   </div>
-                </ScrollReveal>
+                  <div className="mt-6">
+                    <span className="block text-sm text-gray-500 mb-2">
+                      {work.category}
+                    </span>
+                    <h3 className="text-2xl md:text-3xl font-semibold mb-2">
+                      {work.title}
+                    </h3>
+                    <p className="text-lg">{work.description}</p>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -106,6 +108,7 @@ const Work = () => {
       </main>
       
       <Footer />
+      <CustomCursor />
     </div>
   );
 };
