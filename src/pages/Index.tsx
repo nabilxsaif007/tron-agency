@@ -1,12 +1,43 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React, { useEffect } from 'react';
+import HeroSection from '../components/home/HeroSection';
+import ProjectsShowcase from '../components/home/ProjectsShowcase';
+import AwardsSection from '../components/home/AwardsSection';
+import AboutSection from '../components/home/AboutSection';
+import ClientsSection from '../components/home/ClientsSection';
+import ContactSection from '../components/home/ContactSection';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import CustomCursor from '../components/utils/CustomCursor';
 
 const Index = () => {
+  useEffect(() => {
+    // Smooth scroll setup
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+    
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-white">
+      <CustomCursor />
+      <Navbar />
+      
+      <main>
+        <HeroSection />
+        <ProjectsShowcase />
+        <AwardsSection />
+        <AboutSection />
+        <ClientsSection />
+        <ContactSection />
+      </main>
+      
+      <Footer />
     </div>
   );
 };

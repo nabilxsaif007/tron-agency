@@ -1,25 +1,36 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/layout/Navbar';
+import Footer from '../components/layout/Footer';
+import CustomCursor from '../components/utils/CustomCursor';
+import { ArrowRight } from 'lucide-react';
 
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname
-    );
-  }, [location.pathname]);
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen bg-white">
+      <CustomCursor />
+      <Navbar />
+      
+      <main className="pt-32 pb-24">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="h1 mb-6">404</h1>
+            <p className="large-text mb-12">
+              The page you're looking for doesn't exist or has been moved.
+            </p>
+            <Link 
+              to="/" 
+              className="btn btn-primary group"
+            >
+              <span>Back to Home</span>
+              <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </div>
+        </div>
+      </main>
+      
+      <Footer />
     </div>
   );
 };
