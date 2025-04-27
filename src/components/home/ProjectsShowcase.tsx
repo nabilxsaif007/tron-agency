@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 // Sample project data
 const projects = [
@@ -36,51 +37,53 @@ const projects = [
 ];
 
 const ProjectsShowcase = () => {
-  console.log('ProjectsShowcase rendering'); // Debug log
+  console.log('ProjectsShowcase rendering - simplified version'); // Debug log
   
   return (
     <section className="py-24 bg-white">
-      <div className="container-custom">
+      <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row items-start justify-between mb-16">
-          <h2 className="h2 max-w-lg mb-6 md:mb-0">Featured Work</h2>
+          <h2 className="text-4xl font-bold max-w-lg mb-6 md:mb-0">Featured Work</h2>
           <div className="max-w-md">
-            <p className="large-text mb-6">
+            <p className="text-xl mb-6">
               We collaborate with ambitious brands and people.
             </p>
-            <Link 
-              to="/work" 
-              className="inline-flex items-center text-lg group"
+            <Button 
+              variant="outline"
+              className="group"
+              asChild
             >
-              View all work
-              <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
-            </Link>
+              <Link to="/work">
+                View all work
+                <ArrowRight className="ml-2 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
-          {projects.map((project, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project) => (
             <div
               key={project.id}
-              className="project-card group"
+              className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300"
             >
               <Link to={`/work/${project.id}`} className="block">
                 <div className="relative overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="project-card-image w-full aspect-[4/3] object-cover"
+                    className="w-full aspect-[4/3] object-cover transition-transform duration-300 hover:scale-105"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 </div>
-                <div className="mt-6">
+                <div className="p-6">
                   <span className="block text-sm text-gray-500 mb-2">
                     {project.category}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-semibold mb-2">
+                  <h3 className="text-2xl font-semibold mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-lg">{project.description}</p>
+                  <p className="text-gray-700">{project.description}</p>
                 </div>
               </Link>
             </div>
